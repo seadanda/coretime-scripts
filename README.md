@@ -14,5 +14,5 @@ Currently just checks the Rococo chain state to find parachains with multiple co
 Can be expanded in the future to output more information, add other chains and generalise things a bit.
 
 ```sh
-python detect_multiple_cores.py`
+python detect_multiple_cores.py
 ```
