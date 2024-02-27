@@ -35,7 +35,10 @@ def find_duplicates(cores):
 
 if __name__ == "__main__":
     RELAY_URL = "wss://rococo-rpc.polkadot.io"
+    CORETIME_URL = "wss://rococo-coretime-rpc.polkadot.io"
+
     relay = SubstrateInterface(url=RELAY_URL)
+    coretime = SubstrateInterface(url=CORETIME_URL)
 
     print("Tasks with multiple cores in the current workload:")
     core_descriptors = relay.query_map("CoretimeAssignmentProvider", "CoreDescriptors")
@@ -46,3 +49,8 @@ if __name__ == "__main__":
     core_schedules = relay.query_map("CoretimeAssignmentProvider", "CoreSchedules")
     future_dupes = find_duplicates(core_schedules)
     pprint(future_dupes)
+
+    print("Tasks currently on a lease")
+    leases = coretime.query("Broker", "Leases")
+    pprint(leases.value)
+    # Cross-ref?
